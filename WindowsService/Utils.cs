@@ -102,9 +102,7 @@ namespace WindowsService
         {
             if (IsServiceInstalled(serviceName))
             {
-                AssemblyInstaller uninstall = new AssemblyInstaller(assembly, null);
-                uninstall.UseNewContext = true;
-                uninstall.Uninstall(null);
+                return;
             }
 
             using (AssemblyInstaller installer = GetInstaller(assembly))
