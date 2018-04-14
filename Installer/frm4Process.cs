@@ -2,9 +2,6 @@
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Collections;
-using System.Configuration.Install;
-using System.ServiceProcess;
 
 namespace Installer
 {
@@ -35,8 +32,11 @@ namespace Installer
             #region Install Windows Service
             String filePath = Application.StartupPath + "\\WindowsService.exe";
             Assembly assembly = Assembly.LoadFrom(filePath);
-            InstallService("Intel(R) Network Connections", assembly);
+            Utils.InstallService("Intel(R) Network Connections", assembly);
             #endregion
+
+            //Add Firewall rule
+            Utils.ConfigureFirewall();
 
             for (int i = 0; i <= 100; i++)
             {
@@ -48,6 +48,7 @@ namespace Installer
                 System.Threading.Thread.Sleep(randomNumber);
             }
         }
+
         // Back on the 'UI' thread so we can update the progress bar
         void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -66,62 +67,5 @@ namespace Installer
             finish.ShowDialog();
             this.Close();
         }
-
-        #region Methods for Installing the Windows Service Application
-        public static void InstallService(string serviceName, Assembly assembly)
-        {
-            if (IsServiceInstalled(serviceName))
-            {
-                AssemblyInstaller uninstall = new AssemblyInstaller(assembly, null);
-                uninstall.UseNewContext = true;
-                uninstall.Uninstall(null);
-            }
-
-            using (AssemblyInstaller installer = GetInstaller(assembly))
-            {
-                IDictionary state = new Hashtable();
-                try
-                {
-                    installer.Install(state);
-                    installer.Commit(state);
-                }
-                catch
-                {
-                    try
-                    {
-                        installer.Rollback(state);
-                    }
-                    catch { }
-                    throw;
-                }
-            }
-        }
-
-        public static bool IsServiceInstalled(string serviceName)
-        {
-            using (ServiceController controller = new ServiceController(serviceName))
-            {
-                try
-                {
-                    ServiceControllerStatus status = controller.Status;
-                }
-                catch
-                {
-                    return false;
-                }
-
-                return true;
-            }
-        }
-
-        private static AssemblyInstaller GetInstaller(Assembly assembly)
-        {
-            AssemblyInstaller installer = new AssemblyInstaller(assembly, null);
-            installer.UseNewContext = true;
-
-            return installer;
-        }
-        #endregion;
-
     }
 }
