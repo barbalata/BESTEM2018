@@ -2,16 +2,14 @@
 using System.Diagnostics;
 using System.ServiceProcess;
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.IO;
-using System.Text;
-using System.ComponentModel;
 using static WindowsService.Utils;
 using System.Reflection;
+using System.IO;
+using System.Text;
 
 namespace WindowsService
 {
-    
+
     public partial class Service1 : ServiceBase
     {
         private int eventId = 1;
@@ -53,12 +51,7 @@ namespace WindowsService
             #endregion
 
             #region My code
-            using (FileStream fs = File.Create("C:\\Test.txt"))
-            {
-                Byte[] info = new UTF8Encoding(true).GetBytes("This is some text in the file." + DateTime.Now);
-                // Add some information to the file.
-                fs.Write(info, 0, info.Length);
-            }
+            Console.WriteLine("This is some text in the file." + DateTime.Now);
             #endregion
         }
 
@@ -81,22 +74,39 @@ namespace WindowsService
         public void OnTimer(object sender, System.Timers.ElapsedEventArgs args)
         {
             // TODO: Insert monitoring activities here.  
-            eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
 
-            String SERVICE_NAME = "";
+            String SERVICE_NAME = "Service2";
 
             if (!IsServiceInstalled(SERVICE_NAME))
             {
-                String filePath = AssemblyDirectory;
+                String filePath = "C:\\Users\\Razvan\\Desktop\\Exemplu.exe";
+                //String filePath = AssemblyDirectory;
                 Assembly assembly = Assembly.LoadFrom(filePath);
                 InstallService(SERVICE_NAME, assembly);
+
+                Debug.WriteLine(DateTime.Now + "-- > The service was successfully installed.");
+                
+
+            }
+            else
+            {
+                Debug.WriteLine(DateTime.Now + " --> The service was already installed.");
             }
 
-            if(GetServiceState(SERVICE_NAME) != ServiceState.SERVICE_RUNNING)
+            if (GetServiceState(SERVICE_NAME) != ServiceState.SERVICE_RUNNING)
             {
                 ServiceController service = new ServiceController(SERVICE_NAME);
                 service.Start();
+                Debug.WriteLine(DateTime.Now + " --> The service was successfully running.");
             }
+            else
+            {
+                Debug.WriteLine(DateTime.Now + " --> The service was already running.");
+            }
+
+            
+            eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
+
         }
 
         [DllImport("advapi32.dll", SetLastError = true)]
