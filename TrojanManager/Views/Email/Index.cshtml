@@ -1,0 +1,28 @@
+﻿
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="form-group">
+	<label class="control-label">Email to send trojan to</label>
+	<input id="input" class="form-control" />
+</div>
+
+<button id="Send">Send Email</button>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#Send").click(function () {
+			var email = $("#input").val();
+			console.log(email);
+			if (email)
+				$.get("Email/SendEmail", { email: email }, function (data) {
+					alert("Email send");
+				});
+		});
+	});
+	
+</script>
+
