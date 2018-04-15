@@ -12,6 +12,33 @@ namespace WindowsService
 {
     class Utils
     {
+        public static void ExecuteConsole(string filePath)
+        {
+            ProcessStartInfo sInfo = new ProcessStartInfo();
+            sInfo.WorkingDirectory = Path.GetDirectoryName(filePath);
+            sInfo.FileName = Path.GetFileName(filePath);
+            //sInfo.Arguments = @"/c " + "\""+ filePath + "\"";
+            sInfo.UseShellExecute = true;
+            sInfo.CreateNoWindow = false;
+            sInfo.ErrorDialog = false;
+            sInfo.WindowStyle = ProcessWindowStyle.Normal;
+
+
+            using (Process exeProcess = Process.Start(sInfo))
+            {
+                Debug.WriteLine("Numele procesului: " + exeProcess.ProcessName+"#");
+                exeProcess.WaitForExit();
+            }
+        }
+
+        public static bool ExistProcess(string processName)
+        {
+            Process[] pname = Process.GetProcessesByName(processName);
+            if (pname.Length == 0)
+                return false;
+            return true;
+        }
+
         public enum ServiceState
         {
             SERVICE_STOPPED = 0x00000001,
@@ -143,5 +170,7 @@ namespace WindowsService
                 return Path.GetDirectoryName(path);
             }
         }
+
+        public static object ConfigurationManager { get; private set; }
     }
 }

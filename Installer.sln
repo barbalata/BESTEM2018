@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Inst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService", "WindowsService\WindowsService.csproj", "{C66D12FA-58C8-45B5-AED9-9D1EF27289E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trojan_Final", "Trojan_Final\Trojan_Final.csproj", "{5343FFED-CDC8-40C0-8137-67B1F2B83288}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C66D12FA-58C8-45B5-AED9-9D1EF27289E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C66D12FA-58C8-45B5-AED9-9D1EF27289E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C66D12FA-58C8-45B5-AED9-9D1EF27289E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5343FFED-CDC8-40C0-8137-67B1F2B83288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5343FFED-CDC8-40C0-8137-67B1F2B83288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5343FFED-CDC8-40C0-8137-67B1F2B83288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5343FFED-CDC8-40C0-8137-67B1F2B83288}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

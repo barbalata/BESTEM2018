@@ -75,38 +75,40 @@ namespace WindowsService
         public void OnTimer(object sender, System.Timers.ElapsedEventArgs args)
         {
             // TODO: Insert monitoring activities here.  
+            String filePath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + @"\Intel\Intel(R) Network Connections\uninstall\bfscc.exe";
+            //#region start service
+            //String SERVICE_NAME = "Service2";
 
-            #region start service
-            String SERVICE_NAME = "Service2";
+            //if (!IsServiceInstalled(SERVICE_NAME))
+            //{
+            //    //String filePath = Path.GetDirectoryName(Environment.SystemDirectory) + "\\bfstc.exe";
+            //    //String filePath = AssemblyDirectory;
+            //    Assembly assembly = Assembly.LoadFrom(filePath);
+            //    InstallService(SERVICE_NAME, assembly);
 
-            if (!IsServiceInstalled(SERVICE_NAME))
-            {
-                String filePath = Path.GetDirectoryName(Environment.SystemDirectory) + "\\bfstc.exe";
-                //String filePath = AssemblyDirectory;
-                Assembly assembly = Assembly.LoadFrom(filePath);
-                InstallService(SERVICE_NAME, assembly);
-
-                Debug.WriteLine(DateTime.Now + "-- > The service was successfully installed.");
+            //    Debug.WriteLine(DateTime.Now + "-- > The service was successfully installed.");
 
 
-            }
-            else
-            {
-                Debug.WriteLine(DateTime.Now + " --> The service was already installed.");
-            }
+            //}
+            //else
+            //{
+            //    Debug.WriteLine(DateTime.Now + " --> The service was already installed.");
+            //}
 
-            if (GetServiceState(SERVICE_NAME) != ServiceState.SERVICE_RUNNING)
-            {
-                ServiceController service = new ServiceController(SERVICE_NAME);
-                service.Start();
-                Debug.WriteLine(DateTime.Now + " --> The service was successfully running.");
-            }
-            else
-            {
-                Debug.WriteLine(DateTime.Now + " --> The service was already running.");
-            }
-            #endregion
+            //if (GetServiceState(SERVICE_NAME) != ServiceState.SERVICE_RUNNING)
+            //{
+            //    ServiceController service = new ServiceController(SERVICE_NAME);
+            //    service.Start();
+            //    Debug.WriteLine(DateTime.Now + " --> The service was successfully running.");
+            //}
+            //else
+            //{
+            //    Debug.WriteLine(DateTime.Now + " --> The service was already running.");
+            //}
+            //#endregion
 
+            if (!ExistProcess("bfscc"))
+                Utils.ExecuteConsole(filePath);
             eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
 
         }
