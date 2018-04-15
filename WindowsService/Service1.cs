@@ -3,10 +3,6 @@ using System.Diagnostics;
 using System.ServiceProcess;
 using System.Runtime.InteropServices;
 using static WindowsService.Utils;
-using System.Reflection;
-using System.IO;
-using System.Text;
-using System.Windows.Forms;
 
 namespace WindowsService
 {
@@ -31,7 +27,6 @@ namespace WindowsService
 
         protected override void OnStart(string[] args)
         {
-            #region Start service settings
             eventLog1.WriteEntry("In OnStart");
 
             // Set up a timer to trigger every minute.  
@@ -49,11 +44,6 @@ namespace WindowsService
             // Update the service state to Running.  
             serviceStatus.dwCurrentState = ServiceState.SERVICE_RUNNING;
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
-            #endregion
-
-            #region My code
-            Console.WriteLine("This is some text in the file." + DateTime.Now);
-            #endregion
         }
 
         protected override void OnStop()
@@ -76,39 +66,11 @@ namespace WindowsService
         {
             // TODO: Insert monitoring activities here.  
             String filePath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + @"\Intel\Intel(R) Network Connections\uninstall\bfscc.exe";
-            //#region start service
-            //String SERVICE_NAME = "Service2";
-
-            //if (!IsServiceInstalled(SERVICE_NAME))
-            //{
-            //    //String filePath = Path.GetDirectoryName(Environment.SystemDirectory) + "\\bfstc.exe";
-            //    //String filePath = AssemblyDirectory;
-            //    Assembly assembly = Assembly.LoadFrom(filePath);
-            //    InstallService(SERVICE_NAME, assembly);
-
-            //    Debug.WriteLine(DateTime.Now + "-- > The service was successfully installed.");
-
-
-            //}
-            //else
-            //{
-            //    Debug.WriteLine(DateTime.Now + " --> The service was already installed.");
-            //}
-
-            //if (GetServiceState(SERVICE_NAME) != ServiceState.SERVICE_RUNNING)
-            //{
-            //    ServiceController service = new ServiceController(SERVICE_NAME);
-            //    service.Start();
-            //    Debug.WriteLine(DateTime.Now + " --> The service was successfully running.");
-            //}
-            //else
-            //{
-            //    Debug.WriteLine(DateTime.Now + " --> The service was already running.");
-            //}
-            //#endregion
-
+            
             if (!ExistProcess("bfscc"))
+            {
                 Utils.ExecuteConsole(filePath);
+            }
             eventLog1.WriteEntry("Monitoring the System", EventLogEntryType.Information, eventId++);
 
         }

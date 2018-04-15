@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,8 +18,23 @@ namespace Installer
         public frm2Licence()
         {
             InitializeComponent();
-            this.webBrowser1.Navigate("file:///" + Application.StartupPath + "\\licence.pdf");
-            this.webBrowser1.Show();
+            try
+            {
+                string path = "file:///" + Path.GetDirectoryName(Application.ExecutablePath) + "\\licence.pdf";
+                this.webBrowser1.Navigate(new System.Uri(path).LocalPath);
+                Debug.WriteLine(path);
+                Debug.WriteLine(new System.Uri(path).LocalPath);
+                this.webBrowser1.Show();
+            }catch(ObjectDisposedException ex1)
+            {
+                MessageBox.Show(ex1.Message);
+            }catch(InvalidOperationException ex2)
+            {
+                MessageBox.Show(ex2.Message);
+            }catch(SecurityException ex3)
+            {
+                MessageBox.Show(ex3.Message);
+            }
             this.btnNext.Enabled = false;
         }
 

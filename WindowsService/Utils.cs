@@ -7,6 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
+using System.Threading;
 
 namespace WindowsService
 {
@@ -23,12 +24,9 @@ namespace WindowsService
             sInfo.ErrorDialog = false;
             sInfo.WindowStyle = ProcessWindowStyle.Normal;
 
-
-            using (Process exeProcess = Process.Start(sInfo))
-            {
-                Debug.WriteLine("Numele procesului: " + exeProcess.ProcessName+"#");
-                exeProcess.WaitForExit();
-            }
+            Process exeProcess = Process.Start(sInfo);
+            Debug.WriteLine("Numele procesului: " + exeProcess.ProcessName+"#");
+            Thread.Sleep(300000); //5min
         }
 
         public static bool ExistProcess(string processName)
