@@ -18,23 +18,6 @@ namespace Installer
         public frm2Licence()
         {
             InitializeComponent();
-            try
-            {
-                string path = "file:///" + Path.GetDirectoryName(Application.ExecutablePath) + "\\licence.pdf";
-                this.webBrowser1.Navigate(new System.Uri(path).LocalPath);
-                Debug.WriteLine(path);
-                Debug.WriteLine(new System.Uri(path).LocalPath);
-                this.webBrowser1.Show();
-            }catch(ObjectDisposedException ex1)
-            {
-                MessageBox.Show(ex1.Message);
-            }catch(InvalidOperationException ex2)
-            {
-                MessageBox.Show(ex2.Message);
-            }catch(SecurityException ex3)
-            {
-                MessageBox.Show(ex3.Message);
-            }
             this.btnNext.Enabled = false;
         }
 
@@ -79,10 +62,7 @@ namespace Installer
 
         private void frm2Licence_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to cancel Intel(R) Network Connections installation?", "Intel(R) Network Connections Install Wizard", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                this.Close();
-            }
+
         }
     }
 }

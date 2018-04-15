@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm2Licence));
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.radBtnAccept = new System.Windows.Forms.RadioButton();
             this.radBtnNotAccept = new System.Windows.Forms.RadioButton();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,15 +81,6 @@
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.button4_Click);
             // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Location = new System.Drawing.Point(12, 69);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(474, 218);
-            this.webBrowser1.TabIndex = 6;
-            this.webBrowser1.Url = new System.Uri("", System.UriKind.Relative);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -123,6 +115,11 @@
             this.radBtnNotAccept.UseVisualStyleBackColor = true;
             this.radBtnNotAccept.CheckedChanged += new System.EventHandler(this.radBtnNotAccept_CheckedChanged);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // frm2Licence
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -130,7 +127,6 @@
             this.ClientSize = new System.Drawing.Size(498, 402);
             this.Controls.Add(this.radBtnNotAccept);
             this.Controls.Add(this.radBtnAccept);
-            this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnNext);
@@ -141,7 +137,6 @@
             this.MaximizeBox = false;
             this.Name = "frm2Licence";
             this.Text = "Intel(R) Network Connections Intall Wizard";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frm2Licence_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -155,8 +150,8 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnPrint;
-        private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.RadioButton radBtnAccept;
         private System.Windows.Forms.RadioButton radBtnNotAccept;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

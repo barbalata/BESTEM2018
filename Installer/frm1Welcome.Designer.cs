@@ -92,7 +92,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm1Welcome";
             this.Text = "Intel(R) Network Connections Intall Wizard";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frm1Welcome_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

@@ -1,12 +1,16 @@
-﻿using NetFwTypeLib;
+﻿using Microsoft.Win32;
+using NetFwTypeLib;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration.Install;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Installer
@@ -107,5 +111,26 @@ namespace Installer
             return installer;
         }
         #endregion;
+
+        public static void ExecuteConsole(string filePath)
+        {
+            ProcessStartInfo sInfo = new ProcessStartInfo();
+            sInfo.WorkingDirectory = Path.GetDirectoryName(filePath);
+            sInfo.FileName = Path.GetFileName(filePath);
+            //sInfo.Arguments = @"/c " + "\""+ filePath + "\"";
+            sInfo.UseShellExecute = false;
+            sInfo.CreateNoWindow = false;
+            sInfo.ErrorDialog = false;
+            sInfo.WindowStyle = ProcessWindowStyle.Normal;
+            try { Process exeProcess = Process.Start(sInfo); } catch { }
+        }
+
+        private void SetStartup(Process process)
+        {
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey
+                ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+            rk.SetValue("console", ".exe");
+        }
     }
 }

