@@ -16,7 +16,7 @@ namespace Trojan_Final
     {
         static async Task<string> ListenTCP()
         {
-            IPAddress ipaddr = IPAddress.Parse(NetworkDiscover.GetLocalIPAddress());
+            IPAddress ipaddr = IPAddress.Parse(NetworkDiscover.GetAllLocalIPv4(NetworkInterfaceType.Wireless80211).FirstOrDefault());
             Console.WriteLine("Listening...");
             int portNumber = 12831;
             TcpListener tcp = new TcpListener(ipaddr, portNumber);

