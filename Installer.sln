@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intel Service", "WindowsSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Trojan_Final\Console.csproj", "{5343FFED-CDC8-40C0-8137-67B1F2B83288}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrojanManager", "TrojanManager\TrojanManager.csproj", "{ADCF5451-D93B-449C-BFAC-6DA9FF101D63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5343FFED-CDC8-40C0-8137-67B1F2B83288}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5343FFED-CDC8-40C0-8137-67B1F2B83288}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5343FFED-CDC8-40C0-8137-67B1F2B83288}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADCF5451-D93B-449C-BFAC-6DA9FF101D63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADCF5451-D93B-449C-BFAC-6DA9FF101D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADCF5451-D93B-449C-BFAC-6DA9FF101D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADCF5451-D93B-449C-BFAC-6DA9FF101D63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
