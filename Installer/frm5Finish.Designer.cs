@@ -90,6 +90,7 @@
             this.MaximizeBox = false;
             this.Name = "frm5Finish";
             this.Text = "Intel(R) Network Connections Intall Wizard";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frm5Finish_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

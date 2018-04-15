@@ -141,6 +141,7 @@
             this.MaximizeBox = false;
             this.Name = "frm2Licence";
             this.Text = "Intel(R) Network Connections Intall Wizard";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frm2Licence_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

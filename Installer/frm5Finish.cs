@@ -21,6 +21,13 @@ namespace Installer
         {
             Application.Exit();
         }
-        
+
+        private void frm5Finish_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to cancel Intel(R) Network Connections installation?", "Intel(R) Network Connections Install Wizard", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
     }
 }

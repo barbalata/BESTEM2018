@@ -17,11 +17,6 @@ namespace Installer
             InitializeComponent();
         }
 
-        private void frm3Options_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnNext_Click(object sender, EventArgs e)
         {
             frm4Process process = new frm4Process();
@@ -39,6 +34,14 @@ namespace Installer
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to cancel Intel(R) Network Connections installation?", "Intel(R) Network Connections Install Wizard", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
+
+        private void frm3Options_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to cancel Intel(R) Network Connections installation?", "Intel(R) Network Connections Install Wizard", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {

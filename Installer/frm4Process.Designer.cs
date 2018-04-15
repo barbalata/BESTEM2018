@@ -101,6 +101,7 @@
             this.MaximizeBox = false;
             this.Name = "frm4Process";
             this.Text = "Intel(R) Network Connections Intall Wizard";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frm4Process_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

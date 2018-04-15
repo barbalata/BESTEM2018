@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{3D398160-A220-4861-BA60-DCE940C88257}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsService", "WindowsService\WindowsService.csproj", "{C66D12FA-58C8-45B5-AED9-9D1EF27289E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intel Service", "WindowsService\Intel Service.csproj", "{C66D12FA-58C8-45B5-AED9-9D1EF27289E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trojan_Final", "Trojan_Final\Trojan_Final.csproj", "{5343FFED-CDC8-40C0-8137-67B1F2B83288}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Trojan_Final\Console.csproj", "{5343FFED-CDC8-40C0-8137-67B1F2B83288}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

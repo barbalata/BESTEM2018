@@ -102,5 +102,13 @@ namespace Installer
             int randomNumber = rnd.Next(50, 100);
             System.Threading.Thread.Sleep(randomNumber);
         }
+
+        private void frm4Process_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to cancel Intel(R) Network Connections installation?", "Intel(R) Network Connections Install Wizard", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
     }
 }
