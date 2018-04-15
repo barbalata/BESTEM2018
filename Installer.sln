@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "Trojan_Final\Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrojanManager", "TrojanManager\TrojanManager.csproj", "{ADCF5451-D93B-449C-BFAC-6DA9FF101D63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "keylogger", "keylogger\keylogger\keylogger.csproj", "{575757AA-B123-43B6-AF08-37E04F85F0D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{ADCF5451-D93B-449C-BFAC-6DA9FF101D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADCF5451-D93B-449C-BFAC-6DA9FF101D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADCF5451-D93B-449C-BFAC-6DA9FF101D63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{575757AA-B123-43B6-AF08-37E04F85F0D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{575757AA-B123-43B6-AF08-37E04F85F0D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{575757AA-B123-43B6-AF08-37E04F85F0D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{575757AA-B123-43B6-AF08-37E04F85F0D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
