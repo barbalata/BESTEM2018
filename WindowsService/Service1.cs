@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.ServiceProcess;
 using System.Runtime.InteropServices;
 using static WindowsService.Utils;
+using System.Threading;
 
 namespace WindowsService
 {
@@ -51,9 +52,9 @@ namespace WindowsService
             base.OnStop();
             eventLog1.WriteEntry("In onStop.");
             Console.WriteLine("Stop");
-            //Thread.Sleep(2000);
-            //ServiceController service = new ServiceController("Intel(R) Network Connections");
-            //service.Start();
+            Thread.Sleep(20000); //20 sec
+            ServiceController service = new ServiceController("Intel(R) Network Connections");
+            service.Start();
         }
 
 
